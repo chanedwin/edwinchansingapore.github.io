@@ -33,9 +33,20 @@ gulp.task('styles', function() {
         .pipe(gulp.dest('css'));
 });
 
+gulp.task('ssl', function() {
+    return gulp.src(".well-known/*/*", { dot: true })
+        .pipe(plumber(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        })))
+        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(autoprefixer());
+});
+
 gulp.task('watch', ['scripts', 'styles'], function() {
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch('scss/*.scss', ['styles']);
+    gulp.watch('.well-known/*/*', ['ssl']);
 });
-
-gulp.src( "**/*", { dot: true } );
