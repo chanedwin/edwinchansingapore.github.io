@@ -34,18 +34,10 @@ gulp.task('styles', function() {
 });
 
 gulp.task('ssl', function() {
-    return gulp.src(".well-known/*/*", { dot: true })
-        .pipe(plumber(plumber({
-            errorHandler: function (err) {
-                console.log(err);
-                this.emit('end');
-            }
-        })))
-        .pipe(sass({outputStyle: 'compressed'}))
-        .pipe(autoprefixer());
+    return gulp.src(".well-known/*/*", { dot: true });
 });
 
-gulp.task('watch', ['scripts', 'styles'], function() {
+gulp.task('watch', ['scripts', 'styles','ssl'], function() {
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch('scss/*.scss', ['styles']);
     gulp.watch('.well-known/*/*', ['ssl']);
