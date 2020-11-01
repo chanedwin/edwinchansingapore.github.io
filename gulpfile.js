@@ -34,15 +34,13 @@ gulp.task('styles', function() {
 });
 
 gulp.task('ssl', function() {
-    return gulp.src(".well-known/*/*", { dot: true })
+    return gulp.src(".well-known/acme-challenge/*", { dot: true })
             .pipe(plumber(plumber({
             errorHandler: function (err) {
                 console.log(err);
                 this.emit('end');
             }
         })))
-        .pipe(sass({outputStyle: 'compressed'}))
-        .pipe(autoprefixer())
         .pipe(gulp.dest('.well-known/acme-challenge'));
 });
 
