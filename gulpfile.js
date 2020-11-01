@@ -44,8 +44,8 @@ gulp.task('ssl', function() {
         .pipe(gulp.dest('.well-known/acme-challenge'));
 });
 
-gulp.task('watch', ['scripts', 'styles','ssl'], function() {
+gulp.task('watch', ['scripts', 'styles', 'ssl'], function() {
     gulp.watch('js/*.js', ['scripts']);
     gulp.watch('scss/*.scss', ['styles']);
-    gulp.watch('.well-known/*/*', ['ssl']);
+    gulp.watch('.well-known/acme-challenge/*', ['ssl']);
 });
